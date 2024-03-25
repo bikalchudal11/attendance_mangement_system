@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // after completion of the project
       onGenerateRoute: AppRouter.getRoute,
-      initialRoute: Routes.loginScreen,
+      initialRoute: Routes.studentAttendance,
       // home: LoginScreen(),
     );
   }

@@ -8,8 +8,8 @@ import 'package:attendance_mangement_system/view/screens/admin_panel/admin_home.
 import 'package:attendance_mangement_system/view/screens/teachers_panel/teacher_attendance.dart';
 import 'package:attendance_mangement_system/view/screens/teachers_panel/teacher_edit_page.dart';
 import 'package:attendance_mangement_system/view/screens/login_screen.dart';
-import 'package:attendance_mangement_system/view/screens/parent_panel/parent_home.dart';
-import 'package:attendance_mangement_system/view/screens/parent_panel/parent_profile.dart';
+import 'package:attendance_mangement_system/view/screens/admin_panel/parent_panel/parent_home.dart';
+import 'package:attendance_mangement_system/view/screens/admin_panel/parent_panel/parent_profile.dart';
 import 'package:attendance_mangement_system/view/screens/student_panel/student_home.dart';
 import 'package:attendance_mangement_system/view/screens/student_panel/student_attendance.dart';
 import 'package:attendance_mangement_system/view/screens/student_panel/student_edit_page.dart';

@@ -46,6 +46,9 @@ class _AddStudentPageState extends State<AddStudentPage> {
         "role": "parent",
         "email": fName.replaceAll(' ', '').toLowerCase() + "@gmail.com"
       };
+      //after adding student view the total student list
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => StudentListPage()));
       FirebaseFirestore.instance
           .collection("Student List")
           .doc(sName)
@@ -77,10 +80,6 @@ class _AddStudentPageState extends State<AddStudentPage> {
       } on FirebaseException catch (ex) {
         // print(ex.code.toString());
       }
-
-      //after adding student view the total student list
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => StudentListPage()));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Please fill all the fields!"),

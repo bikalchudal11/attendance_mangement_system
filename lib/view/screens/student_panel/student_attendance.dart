@@ -1,6 +1,4 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-import 'package:attendance_mangement_system/view/resources/routes/routes.dart';
-import 'package:attendance_mangement_system/view/screens/student_panel/student_attendance_list_tile.dart';
 import 'package:attendance_mangement_system/view/resources/custom_widgets/custom_buttons.dart';
 import 'package:attendance_mangement_system/view/resources/custom_widgets/text_styles.dart';
 import 'package:attendance_mangement_system/model/list/student_list.dart';

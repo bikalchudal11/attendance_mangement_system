@@ -34,6 +34,10 @@ class _AddStudentPageState extends State<AddTeacherPage> {
         "subject": subject,
         "role": "teacher",
       };
+      //after adding student view the total student list
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => TeacherListPage()));
+
       FirebaseFirestore.instance
           .collection("Teacher List")
           .doc(tName)
@@ -56,9 +60,6 @@ class _AddStudentPageState extends State<AddTeacherPage> {
       } on FirebaseException catch (ex) {
         // print(ex.code.toString());
       }
-      //after adding student view the total student list
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => TeacherListPage()));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Please fill all the fields!"),
