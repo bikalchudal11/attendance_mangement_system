@@ -1,5 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first, prefer_interpolation_to_compose_strings, sized_box_for_whitespace, unused_element, use_build_context_synchronously, must_be_immutable
+// ignore_for_file: public_member_api_docs, sort_constructors_first, prefer_interpolation_to_compose_strings, sized_box_for_whitespace, unused_element, use_build_context_synchronously, must_be_immutable, avoid_web_libraries_in_flutter, unused_import, unused_local_variable
 // ignore_for_file: prefer_const_constructors
+
+import 'dart:html' as html;
+import 'dart:js';
 
 import 'dart:io';
 
@@ -13,9 +16,9 @@ import 'package:pdf/widgets.dart' as pw;
 class TeacherReport extends StatelessWidget {
   String passDate;
   TeacherReport({
-    Key? key,
+    super.key,
     required this.passDate,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +64,7 @@ class TeacherReport extends StatelessWidget {
                           child: Icon(Icons.edit)),
                       InkWell(
                         onTap: () {
-                          _generateInvoice(context);
+                          generateAndDownloadPDF();
                         },
                         child: Icon(Icons.download),
                       ),
@@ -74,34 +77,39 @@ class TeacherReport extends StatelessWidget {
         ));
   }
 
-  Future<void> _generateInvoice(BuildContext context) async {
+  Future<void> generateAndDownloadPDF() async {
+    // Create a new PDF document
     final pdf = pw.Document();
 
-    // Create a PDF page
-    pdf.addPage(pw.Page(
-      build: (pw.Context context) {
-        return pw.Center(
-          child: TeachersPdf(),
-        );
-      },
-    ));
+    // Add content to the PDF
+    pdf.addPage(
+      pw.Page(
+        build: (context) {
+          return TeachersPdf();
+        },
+      ),
+    );
 
-    // Get the directory for saving the PDF file
-    final directory = await getApplicationDocumentsDirectory();
-    final filePath =
-        '${directory.path}/($passDate)TeachersAttendanceReport.pdf';
-    final file = File(filePath);
+    // Save the PDF as bytes
+    List<int> pdfBytes = await pdf.save();
 
-    // Save the PDF file
-    await file.writeAsBytes(await pdf.save());
+    // Create a Blob object from the PDF bytes
+    final blob = html.Blob([pdfBytes], 'application/pdf');
 
-    // Show a dialog to indicate the PDF is saved
+    // Create a temporary URL for the Blob object
+    final url = html.Url.createObjectUrlFromBlob(blob);
+
+    // Create a link element
+    final anchor = html.AnchorElement(href: url)
+      ..setAttribute('download', '($passDate)teacherAttendance.pdf')
+      ..click();
+
     showDialog(
-      context: context,
+      context: context as BuildContext,
       builder: (context) => AlertDialog(
-        title: Text('Teachers Attendance report Generated'),
+        title: Text('Students Attendance report Generated'),
         content:
-            Text('The attendance report of teachers is saved at: $filePath'),
+            Text('The attendance report of teachers is saved at: downloads'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -110,5 +118,8 @@ class TeacherReport extends StatelessWidget {
         ],
       ),
     );
+
+    // Revoke the temporary URL to free up memory
+    html.Url.revokeObjectUrl(url);
   }
 }

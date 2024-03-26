@@ -46,9 +46,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
         "role": "parent",
         "email": fName.replaceAll(' ', '').toLowerCase() + "@gmail.com"
       };
-      //after adding student view the total student list
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => StudentListPage()));
+
       FirebaseFirestore.instance
           .collection("Student List")
           .doc(sName)
@@ -57,6 +55,11 @@ class _AddStudentPageState extends State<AddStudentPage> {
           .collection("Parent List")
           .doc(fName)
           .set(newPra);
+
+      //after adding student view the total student list
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => StudentListPage()));
+
       // print("user created");
       sNameController.clear();
       dobController.clear();
@@ -64,21 +67,25 @@ class _AddStudentPageState extends State<AddStudentPage> {
       mNameController.clear();
       emailController.clear();
 
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Student name $sName is added!"),
-        backgroundColor: Colors.green,
-      ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Student name $sName is added!"),
+          backgroundColor: Colors.green,
+        ),
+      );
 
       //also create their account for log in
       try {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: "default");
+
         UserCredential userCredential1 = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
-                email: fName + "@gmail.com", password: "default");
+                email: fName.replaceAll(' ', '').toLowerCase() + "@gmail.com",
+                password: "default");
         // print("user created");
       } on FirebaseException catch (ex) {
-        // print(ex.code.toString());
+        print(ex.code.toString());
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -150,23 +157,6 @@ class _AddStudentPageState extends State<AddStudentPage> {
             InkWell(
                 onTap: () {
                   addStudent();
-                  // String studentValue = name.text;
-                  // if (studentValue.isNotEmpty) {
-                  //   studentName.add(name.text.toString());
-                  //   Navigator.pushReplacement(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //           builder: (context) => StudentListPage()));
-                  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  //     content: Text("Student name: ${name.text} is added!"),
-                  //     backgroundColor: Colors.green,
-                  //   ));
-                  // } else {
-                  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  //     content: Text("Enter student name!"),
-                  //     backgroundColor: Colors.red,
-                  //   ));
-                  // }
                 },
                 child: CustomButton(
                   buttonName: "Add",

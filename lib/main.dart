@@ -4,6 +4,7 @@ import 'package:attendance_mangement_system/firebase_options.dart';
 import 'package:attendance_mangement_system/view/resources/routes/routes.dart';
 import 'package:attendance_mangement_system/view/screens/login_screen.dart';
 import 'package:attendance_mangement_system/view/screens/splash_screen.dart';
+import 'package:attendance_mangement_system/view/screens/student_panel/student_report.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -23,8 +24,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // after completion of the project
       onGenerateRoute: AppRouter.getRoute,
-      initialRoute: Routes.studentAttendance,
-      // home: LoginScreen(),
+      initialRoute: Routes.teacherAttendance,
+      // home: StudentReport(
+      //   passDate: 'test',
+      // ),
     );
   }
 }

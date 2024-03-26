@@ -59,62 +59,64 @@ class TeacherListPage extends StatelessWidget {
                     itemBuilder: (context, index) {
                       Map<String, dynamic> userMap = snapshot.data!.docs[index]
                           .data() as Map<String, dynamic>;
-                      return ListTile(
-                          title: Text(userMap["fullName"]),
-                          subtitle: Text(userMap["email"]),
-                          trailing: IconButton(
-                            onPressed: () {
-                              showDialog(
-                                context: context as BuildContext,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text(
-                                      'Do you want to remove this teacher?',
-                                      style: TextStyle(
-                                        fontSize: 21,
-                                      ),
-                                    ),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () {
-                                          deleteData(userMap["email"]);
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                                  backgroundColor: Colors.red,
-                                                  content: Text(
-                                                    userMap["fullName"] +
-                                                        " is removed from the list",
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                    ),
-                                                  )));
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text(
-                                          'Yes',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                          ),
+                      return Card(
+                        child: ListTile(
+                            title: Text(userMap["fullName"]),
+                            subtitle: Text(userMap["email"]),
+                            trailing: IconButton(
+                              onPressed: () {
+                                showDialog(
+                                  context: context as BuildContext,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text(
+                                        'Do you want to remove this teacher?',
+                                        style: TextStyle(
+                                          fontSize: 21,
                                         ),
                                       ),
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text(
-                                          'No',
-                                          style: TextStyle(
-                                            color: Colors.black,
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            deleteData(userMap["email"]);
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                                    backgroundColor: Colors.red,
+                                                    content: Text(
+                                                      userMap["fullName"] +
+                                                          " is removed from the list",
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                      ),
+                                                    )));
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text(
+                                            'Yes',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                            icon: Icon(Icons.delete),
-                          ));
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text(
+                                            'No',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              icon: Icon(Icons.delete),
+                            )),
+                      );
                     },
                   ),
                 );

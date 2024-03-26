@@ -1,12 +1,11 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first, prefer_interpolation_to_compose_strings, sized_box_for_whitespace, unused_element, use_build_context_synchronously, must_be_immutable
+// ignore_for_file: public_member_api_docs, sort_constructors_first, prefer_interpolation_to_compose_strings, sized_box_for_whitespace, unused_element, use_build_context_synchronously, must_be_immutable, avoid_web_libraries_in_flutter
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:io';
-
-import 'package:attendance_mangement_system/view/screens/student_panel/students_pdf.dart';
+import 'dart:html' as html;
+import 'dart:js';
 import 'package:attendance_mangement_system/view/screens/student_panel/student_attendance_data.dart';
+import 'package:attendance_mangement_system/view/screens/student_panel/students_pdf.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 import 'package:attendance_mangement_system/view/resources/custom_widgets/text_styles.dart';
@@ -14,9 +13,9 @@ import 'package:attendance_mangement_system/view/resources/custom_widgets/text_s
 class StudentReport extends StatelessWidget {
   String passDate;
   StudentReport({
-    Key? key,
+    super.key,
     required this.passDate,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +61,9 @@ class StudentReport extends StatelessWidget {
                           child: Icon(Icons.edit)),
                       InkWell(
                         onTap: () {
-                          _generateInvoice(context);
+                          // _generateInvoice(context);
+
+                          generateAndDownloadPDF();
                         },
                         child: Icon(Icons.download),
                       ),
@@ -75,34 +76,40 @@ class StudentReport extends StatelessWidget {
         ));
   }
 
-  Future<void> _generateInvoice(BuildContext context) async {
+  Future<void> generateAndDownloadPDF() async {
+    // Create a new PDF document
     final pdf = pw.Document();
 
-    // Create a PDF page
-    pdf.addPage(pw.Page(
-      build: (pw.Context context) {
-        return pw.Center(
-          child: StudentsPdf(),
-        );
-      },
-    ));
+    // Add content to the PDF
+    pdf.addPage(
+      pw.Page(
+        build: (context) {
+          return StudentsPdf();
+        },
+      ),
+    );
 
-    // Get the directory for saving the PDF file
-    final directory = await getApplicationDocumentsDirectory();
-    final filePath =
-        '${directory.path}/($passDate)StudentsAttendanceReport.pdf';
-    final file = File(filePath);
+    // Save the PDF as bytes
+    List<int> pdfBytes = await pdf.save();
 
-    // Save the PDF file
-    await file.writeAsBytes(await pdf.save());
+    // Create a Blob object from the PDF bytes
+    final blob = html.Blob([pdfBytes], 'application/pdf');
 
-    // Show a dialog to indicate the PDF is saved
+    // Create a temporary URL for the Blob object
+    final url = html.Url.createObjectUrlFromBlob(blob);
+
+    // Create a link element
+    // ignore: unused_local_variable
+    final anchor = html.AnchorElement(href: url)
+      ..setAttribute('download', '($passDate)studentAttendance.pdf')
+      ..click();
+
     showDialog(
-      context: context,
+      context: context as BuildContext,
       builder: (context) => AlertDialog(
         title: Text('Students Attendance report Generated'),
         content:
-            Text('The attendance report of students is saved at: $filePath'),
+            Text('The attendance report of students is saved at: downloads'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -111,5 +118,8 @@ class StudentReport extends StatelessWidget {
         ],
       ),
     );
+
+    // Revoke the temporary URL to free up memory
+    html.Url.revokeObjectUrl(url);
   }
 }

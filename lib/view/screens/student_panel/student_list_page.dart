@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, unnecessary_cast, sort_child_properties_last, no_leading_underscores_for_local_identifiers, use_build_context_synchronously, unused_element, prefer_const_literals_to_create_immutables, avoid_web_libraries_in_flutter
 // ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings
 
+import 'dart:js';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +35,7 @@ class StudentListPage extends StatelessWidget {
             .collection("Student List")
             .doc(element['fullName']);
         await documentReference.delete();
+
         try {
           User? user = FirebaseAuth.instance.currentUser;
           if (user != null) {
@@ -45,10 +48,10 @@ class StudentListPage extends StatelessWidget {
     }
   }
 
-  // showSnackbar(deleteStuName) {
-  //   ScaffoldMessenger.of(context as BuildContext).showSnackBar(
-  //       SnackBar(content: Text("$deleteStuName is removed from the list")));
-  // }
+  showSnackbar(deleteStuName) {
+    ScaffoldMessenger.of(context as BuildContext).showSnackBar(
+        SnackBar(content: Text("$deleteStuName is removed from the list")));
+  }
 
   @override
   Widget build(BuildContext context) {

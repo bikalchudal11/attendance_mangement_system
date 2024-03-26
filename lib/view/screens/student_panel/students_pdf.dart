@@ -8,123 +8,69 @@ class StudentsPdf extends pw.StatelessWidget {
   DateTime passDate = DateTime.now();
   @override
   pw.Widget build(pw.Context context) {
-    return pw.Padding(
-        padding: const pw.EdgeInsets.symmetric(
-          horizontal: 30,
+    return pw.Column(
+      children: [
+        pw.SizedBox(
+          height: 40,
         ),
-        child: pw.Column(
+        pw.Row(
+          mainAxisAlignment: pw.MainAxisAlignment.end,
           children: [
-            pw.SizedBox(
-              height: 40,
-            ),
-            pw.Row(
-              mainAxisAlignment: pw.MainAxisAlignment.end,
-              children: [
-                pw.Text(
-                  "Date:",
-                ),
-                pw.SizedBox(
-                  width: 5,
-                ),
-                pw.Text(
-                  "${passDate.toLocal()}".split(' ')[0],
-                ),
-              ],
+            pw.Text(
+              "Date:",
             ),
             pw.SizedBox(
-              height: 25,
+              width: 5,
             ),
-            pw.Container(
-              height: 20,
-              width: 200,
-              decoration: pw.BoxDecoration(
-                borderRadius: pw.BorderRadius.circular(10),
-                color: PdfColors.green,
-              ),
-              child: pw.Center(
-                child: pw.Text(
-                  "Present Students: ",
-                  style: pw.TextStyle(fontSize: 18, color: PdfColors.white),
-                ),
-              ),
-            ),
-            pw.SizedBox(
-              height: 10,
-            ),
-            pw.Expanded(
-              child: pw.ListView.builder(
-                  itemCount: presentStudent.length,
-                  itemBuilder: (context, index) => pw.Column(
-                        children: [
-                          pw.Row(
-                            children: [
-                              pw.Text(
-                                (index + 1).toString() + ".",
-                                style: pw.TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                              pw.SizedBox(width: 5),
-                              pw.Text(
-                                presentStudent[index],
-                                style: pw.TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      )),
-            ),
-            pw.SizedBox(
-              height: 20,
-            ),
-            pw.Container(
-              height: 20,
-              width: 200,
-              decoration: pw.BoxDecoration(
-                borderRadius: pw.BorderRadius.circular(10),
-                color: PdfColors.red,
-              ),
-              child: pw.Center(
-                child: pw.Text(
-                  "Absent Students: ",
-                  style: pw.TextStyle(fontSize: 18, color: PdfColors.white),
-                ),
-              ),
-            ),
-            pw.SizedBox(
-              height: 10,
-            ),
-            pw.Expanded(
-              child: pw.ListView.builder(
-                  itemCount: absentStudent.length,
-                  itemBuilder: (context, index) => pw.Column(
-                        children: [
-                          pw.Row(
-                            children: [
-                              pw.Text(
-                                (index + 1).toString() + ".",
-                                style: pw.TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                              pw.SizedBox(width: 5),
-                              pw.Text(
-                                absentStudent[index],
-                                style: pw.TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      )),
-            ),
-            pw.SizedBox(
-              height: 20,
+            pw.Text(
+              "${passDate.toLocal()}".split(' ')[0],
             ),
           ],
-        ));
+        ),
+        pw.SizedBox(
+          height: 25,
+        ),
+        pw.Container(
+          height: 20,
+          width: 200,
+          decoration: pw.BoxDecoration(
+            borderRadius: pw.BorderRadius.circular(10),
+            color: PdfColors.green,
+          ),
+          child: pw.Center(
+            child: pw.Text(
+              "Present Students: ",
+              style: pw.TextStyle(fontSize: 18, color: PdfColors.white),
+            ),
+          ),
+        ),
+        pw.SizedBox(
+          height: 10,
+        ),
+        pw.ListView.builder(
+            itemCount: presentStudent.length,
+            itemBuilder: (context, index) => pw.Column(
+                  children: [
+                    pw.Row(
+                      children: [
+                        pw.Text(
+                          (index + 1).toString() + ".",
+                          style: pw.TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        pw.SizedBox(width: 5),
+                        pw.Text(
+                          presentStudent[index],
+                          style: pw.TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                )),
+      ],
+    );
   }
 }
