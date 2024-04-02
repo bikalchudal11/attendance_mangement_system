@@ -1,6 +1,5 @@
 import 'package:attendance_mangement_system/view/resources/custom_widgets/change_password_page.dart';
 import 'package:attendance_mangement_system/view/screens/admin_panel/admin_setting.dart';
-import 'package:attendance_mangement_system/view/screens/splash_screen.dart';
 import 'package:attendance_mangement_system/view/screens/student_panel/student_setting.dart';
 import 'package:attendance_mangement_system/view/screens/student_panel/add_student_page.dart';
 import 'package:attendance_mangement_system/view/screens/teachers_panel/add_teacher_page.dart';

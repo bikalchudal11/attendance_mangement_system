@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, use_build_context_synchronously, unused_local_variable
 
-import 'package:attendance_mangement_system/model/list/student_list.dart';
 import 'package:attendance_mangement_system/view/resources/custom_widgets/custom_buttons.dart';
 import 'package:attendance_mangement_system/view/resources/custom_widgets/text_styles.dart';
-import 'package:attendance_mangement_system/view/resources/routes/routes.dart';
 import 'package:attendance_mangement_system/view/screens/student_panel/student_list_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';

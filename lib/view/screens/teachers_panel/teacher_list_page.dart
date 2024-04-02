@@ -9,8 +9,8 @@ import 'package:attendance_mangement_system/view/resources/custom_widgets/text_s
 
 class TeacherListPage extends StatelessWidget {
   const TeacherListPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   deleteData(teaEmail) async {
     QuerySnapshot snapshotTeacher =

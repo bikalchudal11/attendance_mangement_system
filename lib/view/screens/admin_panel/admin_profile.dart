@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first, prefer_interpolation_to_compose_strings
+// ignore_for_file: public_member_api_docs, sort_constructors_first, prefer_interpolation_to_compose_strings, must_be_immutable
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
@@ -8,10 +8,10 @@ import 'package:attendance_mangement_system/view/resources/custom_widgets/text_s
 class AdminProfile extends StatelessWidget {
   String name, email;
   AdminProfile({
-    Key? key,
+    super.key,
     required this.name,
     required this.email,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

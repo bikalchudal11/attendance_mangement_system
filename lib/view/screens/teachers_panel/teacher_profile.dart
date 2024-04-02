@@ -4,14 +4,15 @@
 import 'package:attendance_mangement_system/view/resources/custom_widgets/text_styles.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class TeacherProfile extends StatelessWidget {
   String name, email, subject;
   TeacherProfile({
-    Key? key,
+    super.key,
     required this.name,
     required this.email,
     required this.subject,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
