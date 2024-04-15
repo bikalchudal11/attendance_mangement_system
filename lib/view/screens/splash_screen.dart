@@ -34,15 +34,17 @@ class _SplashScreenState extends State<SplashScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("  Attendance\nManagement\n      System",
-              style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 40,
-                  decoration: TextDecoration.none,
-                  fontStyle: FontStyle.italic)),
+          Text(
+            "  Attendance\nManagement\n      System",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 45,
+              decoration: TextDecoration.none,
+            ),
+          ),
           SizedBox(
-            height: 20,
+            height: 40,
           ),
           CircularProgressIndicator(
             color: Colors.white,

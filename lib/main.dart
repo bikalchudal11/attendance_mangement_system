@@ -19,9 +19,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Poppins'),
       // after completion of the project
       onGenerateRoute: AppRouter.getRoute,
-      initialRoute: Routes.loginScreen,
+      initialRoute: Routes.splash,
       // home: StudentReport(
       //   passDate: 'test',
       // ),

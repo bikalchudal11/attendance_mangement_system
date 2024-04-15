@@ -1,14 +1,14 @@
 import 'package:attendance_mangement_system/view/resources/custom_widgets/change_password_page.dart';
 import 'package:attendance_mangement_system/view/screens/admin_panel/admin_setting.dart';
+import 'package:attendance_mangement_system/view/screens/parent_panel/parent_home.dart';
+import 'package:attendance_mangement_system/view/screens/parent_panel/parent_profile.dart';
+import 'package:attendance_mangement_system/view/screens/splash_screen.dart';
 import 'package:attendance_mangement_system/view/screens/student_panel/student_setting.dart';
 import 'package:attendance_mangement_system/view/screens/student_panel/add_student_page.dart';
 import 'package:attendance_mangement_system/view/screens/teachers_panel/add_teacher_page.dart';
 import 'package:attendance_mangement_system/view/screens/admin_panel/admin_home.dart';
 import 'package:attendance_mangement_system/view/screens/teachers_panel/teacher_attendance.dart';
-import 'package:attendance_mangement_system/view/screens/teachers_panel/teacher_edit_page.dart';
 import 'package:attendance_mangement_system/view/screens/login_screen.dart';
-import 'package:attendance_mangement_system/view/screens/admin_panel/parent_panel/parent_home.dart';
-import 'package:attendance_mangement_system/view/screens/admin_panel/parent_panel/parent_profile.dart';
 import 'package:attendance_mangement_system/view/screens/student_panel/student_home.dart';
 import 'package:attendance_mangement_system/view/screens/student_panel/student_attendance.dart';
 import 'package:attendance_mangement_system/view/screens/student_panel/student_edit_page.dart';
@@ -20,7 +20,7 @@ import 'package:flutter/material.dart';
 
 class Routes {
   // splash
-  // static const String splash = '/';
+  static const String splash = '/';
 
   //login
   static const String loginScreen = '/loginScreen';
@@ -59,8 +59,8 @@ class Routes {
 class AppRouter {
   static Route<dynamic> getRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-      // case '/':
-      //   return MaterialPageRoute(builder: (_) => const SplashScreen());
+      case '/':
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
 
       case '/loginScreen':
 
@@ -106,8 +106,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const AddStudentPage());
       case '/teacherAttendance':
         return MaterialPageRoute(builder: (_) => const TeacherAttendance());
-      case '/teacherEdit':
-        return MaterialPageRoute(builder: (_) => const TeacherEditPage());
+
       case '/studentEdit':
         return MaterialPageRoute(builder: (_) => const StudentEditPage());
       case '/adminSettings':

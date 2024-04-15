@@ -57,7 +57,6 @@ class _LoginScreenState extends State<LoginScreen> {
           for (var element in snapshotTeacher.docs) {
             if (element['email'] == email && element['role'] == "teacher") {
               Navigator.pushReplacementNamed(context, Routes.teacherPanel);
-              // print(element['email'] + " " + element['role']);
             }
           }
 
@@ -77,7 +76,6 @@ class _LoginScreenState extends State<LoginScreen> {
           for (var element in snapshotParent.docs) {
             if (element['email'] == email && element['role'] == "parent") {
               Navigator.pushReplacementNamed(context, Routes.parentPanel);
-              // print(element['email'] + " " + element['role']);
             }
           }
         }
