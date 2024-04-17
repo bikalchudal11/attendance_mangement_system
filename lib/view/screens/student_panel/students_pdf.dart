@@ -70,6 +70,49 @@ class StudentsPdf extends pw.StatelessWidget {
                     )
                   ],
                 )),
+        pw.SizedBox(
+          height: 25,
+        ),
+        pw.Container(
+          height: 20,
+          width: 200,
+          decoration: pw.BoxDecoration(
+            borderRadius: pw.BorderRadius.circular(10),
+            color: PdfColors.red,
+          ),
+          child: pw.Center(
+            child: pw.Text(
+              "Absent Students: ",
+              style: pw.TextStyle(fontSize: 18, color: PdfColors.white),
+            ),
+          ),
+        ),
+        pw.SizedBox(
+          height: 10,
+        ),
+        pw.ListView.builder(
+            itemCount: presentStudent.length,
+            itemBuilder: (context, index) => pw.Column(
+                  children: [
+                    pw.Row(
+                      children: [
+                        pw.Text(
+                          (index + 1).toString() + ".",
+                          style: pw.TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        pw.SizedBox(width: 5),
+                        pw.Text(
+                          absentStudent[index],
+                          style: pw.TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                )),
       ],
     );
   }

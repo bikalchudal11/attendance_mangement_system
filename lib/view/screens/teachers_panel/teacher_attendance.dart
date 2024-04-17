@@ -1,9 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:attendance_mangement_system/model/list/teacher_list.dart';
-import 'package:attendance_mangement_system/view/screens/teachers_panel/teacher_attendance_review.dart';
 import 'package:attendance_mangement_system/view/resources/custom_widgets/custom_buttons.dart';
 import 'package:attendance_mangement_system/view/resources/custom_widgets/text_styles.dart';
+import 'package:attendance_mangement_system/model/list/student_list.dart';
+import 'package:attendance_mangement_system/view/screens/student_panel/student_attendance_review.dart';
+import 'package:attendance_mangement_system/view/screens/teachers_panel/teacher_attendance_review.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -32,11 +33,11 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
 
   @override
   void initState() {
-    fetchTeachers();
+    fetchTeacher();
     super.initState();
   }
 
-  fetchTeachers() {
+  fetchTeacher() {
     return FirebaseFirestore.instance.collection("Teacher List").snapshots();
   }
 
@@ -80,7 +81,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: fetchTeachers(),
+                  stream: fetchTeacher(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.active) {
                       if (snapshot.hasData && snapshot.data != null) {
@@ -91,9 +92,14 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                               Map<String, dynamic> userMap =
                                   snapshot.data!.docs[index].data()
                                       as Map<String, dynamic>;
+                              if (!absentTeachers.contains(snapshot
+                                  .data!.docChanges[index].doc['fullName'])) {
+                                absentTeachers.add(snapshot
+                                    .data!.docChanges[index].doc['fullName']);
+                              }
+                              absentTeachers.removeWhere((element) =>
+                                  presentTeachers.contains(element));
 
-                              // print(studentName);
-                              // print(absentStudent);
                               return InkWell(
                                 onTap: () {
                                   setState(() {
@@ -104,7 +110,6 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                                     } else {
                                       presentTeachers.add(snapshot.data!
                                           .docChanges[index].doc['fullName']);
-                                      print(presentTeachers);
                                     }
                                   });
                                 },
@@ -165,7 +170,7 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
                     }
                   },
                 )
-                // StudentAttendanceListTile()
+                // TeacherAttendanceListTile()
                 ),
           ),
           InkWell(
@@ -190,13 +195,3 @@ class _TeacherAttendanceState extends State<TeacherAttendance> {
     );
   }
 }
-
-// Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceAround,
-//             children: [
-//               Text("Roll No"),
-//               Text("Name"),
-//               Text("Present"),
-//               Text("Absent"),
-//             ],
-//           ),

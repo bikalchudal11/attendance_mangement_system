@@ -90,6 +90,48 @@ class TeacherAttendanceData extends StatelessWidget {
               ),
             ),
             SizedBox(
+              height: 15,
+            ),
+            Container(
+              height: 30,
+              width: MediaQuery.of(context).size.width * 0.6,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.green,
+              ),
+              child: Center(
+                child: Text(
+                  "Absent Teachers: ",
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: absentTeachers.length,
+                itemBuilder: (context, index) => Card(
+                  child: ListTile(
+                    leading: Text(
+                      (index + 1).toString(),
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    title: Text(
+                      absentTeachers[index],
+                      // presentStudentData[index],
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    trailing: Icon(
+                      Icons.check_circle,
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
               height: 20,
             ),
             InkWell(

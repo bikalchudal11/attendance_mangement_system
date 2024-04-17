@@ -2,6 +2,7 @@
 
 import 'package:attendance_mangement_system/firebase_options.dart';
 import 'package:attendance_mangement_system/view/resources/routes/routes.dart';
+import 'package:attendance_mangement_system/view/screens/teachers_panel/teacher_home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -22,10 +23,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(fontFamily: 'Poppins'),
       // after completion of the project
       onGenerateRoute: AppRouter.getRoute,
-      initialRoute: Routes.splash,
-      // home: StudentReport(
-      //   passDate: 'test',
-      // ),
+      initialRoute: Routes.adminPanel,
+      // home: TeacherHome()
     );
   }
 }

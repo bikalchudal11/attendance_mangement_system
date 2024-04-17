@@ -168,7 +168,7 @@ class _AdminHomeState extends State<AdminHome> {
               leading: Icon(Icons.supervised_user_circle),
               title: Text("Teachers List"),
               onTap: () {
-                Navigator.pushNamed(context, Routes.teachersList);
+                Navigator.pushNamed(context, Routes.teacherList);
               },
             ),
             ListTile(

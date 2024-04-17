@@ -146,7 +146,7 @@ class _StudentHomeState extends State<StudentHome> {
               leading: Icon(Icons.supervised_user_circle),
               title: Text("Teachers List"),
               onTap: () {
-                Navigator.pushNamed(context, Routes.teachersList);
+                Navigator.pushNamed(context, Routes.teacherList);
               },
             ),
             ListTile(

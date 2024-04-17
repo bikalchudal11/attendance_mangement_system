@@ -90,9 +90,14 @@ class _StudentAttendanceState extends State<StudentAttendance> {
                               Map<String, dynamic> userMap =
                                   snapshot.data!.docs[index].data()
                                       as Map<String, dynamic>;
+                              if (!absentStudent.contains(snapshot
+                                  .data!.docChanges[index].doc['fullName'])) {
+                                absentStudent.add(snapshot
+                                    .data!.docChanges[index].doc['fullName']);
+                              }
+                              absentStudent.removeWhere((element) =>
+                                  presentStudent.contains(element));
 
-                              // print(studentName);
-                              // print(absentStudent);
                               return InkWell(
                                 onTap: () {
                                   setState(() {
@@ -140,14 +145,7 @@ class _StudentAttendanceState extends State<StudentAttendance> {
                                               color: Colors.white,
                                               fontSize: 16),
                                         )),
-                                      )
-                                      // IconButton(
-                                      //   onPressed: () {},
-                                      //   icon: Icon(
-                                      //     Icons.more_vert,
-                                      //   ),
-                                      // ),
-                                      ),
+                                      )),
                                 ),
                               );
                             },
@@ -188,13 +186,3 @@ class _StudentAttendanceState extends State<StudentAttendance> {
     );
   }
 }
-
-// Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceAround,
-//             children: [
-//               Text("Roll No"),
-//               Text("Name"),
-//               Text("Present"),
-//               Text("Absent"),
-//             ],
-//           ),

@@ -66,7 +66,6 @@ class _LoginScreenState extends State<LoginScreen> {
           for (var element in snapshotAdmin.docs) {
             if (element['email'] == email && element['role'] == "admin") {
               Navigator.pushReplacementNamed(context, Routes.adminPanel);
-              print(element['email'] + " " + element['role']);
             }
           }
 
@@ -86,7 +85,6 @@ class _LoginScreenState extends State<LoginScreen> {
               ex.code.toString(),
               style: TextStyle(color: Colors.black),
             )));
-        // print(ex.code.toString());
         setState(() {
           isLogin = false;
         });
