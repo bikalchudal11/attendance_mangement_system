@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(fontFamily: 'Poppins'),
       // after completion of the project
       onGenerateRoute: AppRouter.getRoute,
-      initialRoute: Routes.adminPanel,
+      initialRoute: Routes.splash,
       // home: TeacherHome()
     );
   }
